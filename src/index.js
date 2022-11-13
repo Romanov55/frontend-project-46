@@ -16,11 +16,10 @@ const genDiff = (filepath1, filepath2) => {
   const findDifferences = (acc, key) => {
     if (obj1Keys.includes(key) && obj2Keys.includes(key)) {
       return obj1[key] === obj2[key] ? [...acc, `   ${key}: ${obj1[key]}`] : [...acc, ` - ${key}: ${obj1[key]}`, ` + ${key}: ${obj2[key]}`];
-    } else {
-      return obj1Keys.includes(key) ? [...acc, ` - ${key}: ${obj1[key]}`] : [...acc, ` + ${key}: ${obj2[key]}`];
     }
+    return obj1Keys.includes(key) ? [...acc, ` - ${key}: ${obj1[key]}`] : [...acc, ` + ${key}: ${obj2[key]}`];
   };
   const result = keys.reduce(findDifferences, []);
   return `{\n${result.join('\n')}\n`;
-}
+};
 export default genDiff;
