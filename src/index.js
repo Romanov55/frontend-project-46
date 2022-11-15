@@ -1,25 +1,20 @@
-import _ from 'lodash';
-import fs from 'fs';
+import { readFileSync } from 'fs';
 import path from 'path';
+import findDiff from './findDiff.js';
 
-const genDiff = (filepath1, filepath2) => {
-  const obj1 = JSON.parse(
-    fs.readFileSync(path.resolve(process.cwd(), filepath1)),
-  );
-  const obj2 = JSON.parse(
-    fs.readFileSync(path.resolve(process.cwd(), filepath2)),
-  );
-  const obj1Keys = Object.keys(obj1);
-  const obj2Keys = Object.keys(obj2);
-  const keys = _.sortBy(Object.keys({ ...obj1, ...obj2 }));
-
-  const findDifferences = (acc, key) => {
-    if (obj1Keys.includes(key) && obj2Keys.includes(key)) {
-      return obj1[key] === obj2[key] ? [...acc, `   ${key}: ${obj1[key]}`] : [...acc, ` - ${key}: ${obj1[key]}`, ` + ${key}: ${obj2[key]}`];
-    }
-    return obj1Keys.includes(key) ? [...acc, ` - ${key}: ${obj1[key]}`] : [...acc, ` + ${key}: ${obj2[key]}`];
-  };
-  const result = keys.reduce(findDifferences, []);
-  return `{\n${result.join('\n')}\n`;
+const readFile = (file) => {
+  const fullPath = path.resolve(process.cwd(), file);
+  const data = readFileSync(fullPath, 'utf-8');
+  return data;
 };
+
+const genDiff = (file1, file2) => {
+  const data1 = readFile(file1);
+  const data2 = readFile(file2);
+
+  const parseData1 = JSON.parse(data1);
+  const parseData2 = JSON.parse(data2);
+  return findDiff(parseData1, parseData2);
+};
+
 export default genDiff;
