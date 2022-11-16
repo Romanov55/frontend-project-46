@@ -1,3 +1,6 @@
+install:
+	npm ci
+
 gendif:
 	node bin/gendif.js
 
