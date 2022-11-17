@@ -2,7 +2,7 @@ install:
 	npm ci
 
 gendif:
-	node bin/gendif.js
+	node bin/gendiff.js
 
 lint:
 	npx eslint .
