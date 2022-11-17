@@ -9,7 +9,7 @@
     "\\.css$": "some-css-transformer"
   },
   "bin": {
-    "gendif": "bin/gendiff.js"
+    "gendiff": "bin/gendiff.js"
   },
   "script": {
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest",
