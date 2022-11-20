@@ -1,42 +1,24 @@
-{
-  "name": "@hexlet/code",
-  "version": "1.0.0",
-  "description": "[![Actions Status](https://github.com/Romanov55/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/Romanov55/frontend-project-46/actions)",
-  "main": "index.js",
-  "type": "module",
-  "transform": {
-    "\\.[jt]sx?$": "babel-jest",
-    "\\.css$": "some-css-transformer"
-  },
-  "bin": {
-    "gendiff": "bin/gendiff.js"
-  },
-  "script": {
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest",
-    "test:coverage": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest --coverage"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Romanov55/frontend-project-46.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Romanov55/frontend-project-46/issues"
-  },
-  "homepage": "https://github.com/Romanov55/frontend-project-46#readme",
-  "dependencies": {
-    "commander": "^9.4.1",
-    "fs": "^0.0.1-security",
-    "jest-cli": "^29.3.1",
-    "lodash": "^4.17.21",
-    "path": "^0.12.7"
-  },
-  "devDependencies": {
-    "cross-env": "^7.0.3",
-    "eslint": "^8.27.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "jest": "^29.3.1"
-  }
-}
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import path from 'path';
+import genDiff from '../src/index.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf8');
+
+const filepath1 = getFixturePath('file1.json');
+const filepath2 = getFixturePath('file2.json');
+const expected = readFile('trueResult.txt');
+
+const filepath3 = getFixturePath('file1.yaml');
+const filepath4 = getFixturePath('file2.yaml');
+
+test('genDiff', () => {
+  expect(genDiff(filepath1, filepath2)).toEqual(expected);
+});
+
+test('genDiff', () => {
+  expect(genDiff(filepath3, filepath4)).toEqual(expected);
+});
