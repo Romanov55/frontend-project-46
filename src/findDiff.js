@@ -1,23 +1,27 @@
 import _ from 'lodash';
 
-const findDiff = (data1, data2) => {
-  const keys1 = _.keys(data1);
-  const keys2 = _.keys(data2);
-  const keys = _.union(keys1, keys2);
-  const result = keys.sort().map((key) => {
-    if (!_.has(data1, key)) {
-      return `  + ${key}: ${data2[key]}`;
-    }
-    if (!_.has(data2, key)) {
-      return `  - ${key}: ${data1[key]}`;
-    }
-    if (data1[key] !== data2[key]) {
-      return `  - ${key}: ${data1[key]}\n  + ${key}: ${data2[key]}`;
-    }
-    return `    ${key}: ${data2[key]}`;
-  });
+const findDiff = (obj1, obj2) => {
 
-  return `{\n${result.join('\n')}\n}`;
+  const allKeys = _.sortBy(_.union(_.keys(obj1), _.keys(obj2)));
+  
+  const result = allKeys.map((key) => {
+    if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
+      return { key, children: findDiff(obj1[key], obj2[key]), type: 'nested' };
+    }
+    if (!_.has(obj1, key)) {
+      return { key, value2: obj2[key], type: 'added' };
+    }
+    if (!_.has(obj2, key)) {
+      return { key, value1: obj1[key], type: 'deleted' };
+    }
+    if (obj1[key] !== obj2[key]) {
+      return {
+        key, value1: obj1[key], value2: obj2[key], type: 'changed',
+      };
+    }
+    return { key, value1: obj1[key], type: 'unchanged' };
+  });
+  return result;
 };
 
 export default findDiff;
