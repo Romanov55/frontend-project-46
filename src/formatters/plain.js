@@ -10,22 +10,20 @@ const findValue = (currentValue) => {
   return currentValue;
 };
 
-const keyPath = (path, line) => {
-  return path === '' ? `${line.key}` : `${path}.${line.key}`
-}
+const keyPath = (path, line) => (path === '' ? `${line.key}` : `${path}.${line.key}`);
 
 const composeAnswer = (line, key) => {
   if (line.type === 'nested') {
     return `${plain(line.children, key)}`;
-  } else if (line.type === 'added') {
+  } if (line.type === 'added') {
     return `Property '${key}' was added with value: ${findValue(line.value2)}`;
-  } else if (line.type === 'deleted') {
+  } if (line.type === 'deleted') {
     return `Property '${key}' was removed`;
-  } 
-  return line.type === 'changed' 
+  }
+  return line.type === 'changed'
     ? `Property '${key}' was updated. From ${findValue(line.value1)} to ${findValue(line.value2)}`
     : '';
-}
+};
 
 const plain = (data, path = '') => {
   const lines = data.flatMap((line) => {
