@@ -30,10 +30,9 @@ const composeAnswer = (line, depth, indentSize, currentIndent) => {
     } else if (line.type === 'deleted') {
       return `${currentIndent}- ${line.key}: ${findValue(line.value1, depth + 2)}`;
     } 
-    return (line.type === 'changed') ? [
-      `${currentIndent}- ${line.key}: ${findValue(line.value1, depth + 2)}`,
-      `${currentIndent}+ ${line.key}: ${findValue(line.value2, depth + 2)}`,
-    ] 
+    return (line.type === 'changed') 
+    ? [`${currentIndent}- ${line.key}: ${findValue(line.value1, depth + 2)}`,
+      `${currentIndent}+ ${line.key}: ${findValue(line.value2, depth + 2)}`,] 
     : `${currentIndent}  ${line.key}: ${findValue(line.value1, depth + 2)}`;
 }
 
