@@ -10,30 +10,23 @@ const findValue = (currentValue) => {
   return currentValue;
 };
 
-const filter = (lines) => {
-  return lines.filter((e) => e !== '').join('\n');
-}
-
 const plain = (data, path = '') => {
   const lines = data.flatMap((el) => {
     const keyPath = (path === '' ? `${el.key}` : `${path}.${el.key}`);
 
     if (el.type === 'nested') {
       return `${plain(el.children, keyPath)}`;
-    }
-    if (el.type === 'added') {
+    } else if (el.type === 'added') {
       return `Property '${keyPath}' was added with value: ${findValue(el.value2)}`;
-    }
-    if (el.type === 'deleted') {
+    } else if (el.type === 'deleted') {
       return `Property '${keyPath}' was removed`;
-    }
-    if (el.type === 'changed') {
-      return `Property '${keyPath}' was updated. From ${findValue(el.value1)} to ${findValue(el.value2)}`;
-    }
-    return '';
+    } 
+    return el.type === 'changed' 
+      ? `Property '${keyPath}' was updated. From ${findValue(el.value1)} to ${findValue(el.value2)}`
+      : '';
   });
 
-  return filter(lines)
+  return lines.filter((e) => e !== '').join('\n');
 };
 
 export default plain;
