@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import parser from './parsers.js';
 import findDiff from './findDiff.js';
-import formatSelection from '../src/formatters/formatSelection.js';
+import formatSelection from './formatters/formatSelection.js';
 
 const getData = (filepath) => fs.readFileSync(path.resolve(process.cwd(), filepath), 'utf8');
 const getFormat = (filepath) => filepath.split('.')[1];
