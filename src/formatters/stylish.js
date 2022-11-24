@@ -29,13 +29,12 @@ const composeAnswer = (line, depth, indentSize, currentIndent) => {
       return `${currentIndent}+ ${line.key}: ${findValue(line.value2, depth + 2)}`;
     } else if (line.type === 'deleted') {
       return `${currentIndent}- ${line.key}: ${findValue(line.value1, depth + 2)}`;
-    } else if (line.type === 'changed') {
-      return [
-        `${currentIndent}- ${line.key}: ${findValue(line.value1, depth + 2)}`,
-        `${currentIndent}+ ${line.key}: ${findValue(line.value2, depth + 2)}`,
-      ];
-    }
-    return `${currentIndent}  ${line.key}: ${findValue(line.value1, depth + 2)}`;
+    } 
+    return (line.type === 'changed') ? [
+      `${currentIndent}- ${line.key}: ${findValue(line.value1, depth + 2)}`,
+      `${currentIndent}+ ${line.key}: ${findValue(line.value2, depth + 2)}`,
+    ] 
+    : `${currentIndent}  ${line.key}: ${findValue(line.value1, depth + 2)}`;
 }
 
 const stylish = (data, depth = 1) => {
