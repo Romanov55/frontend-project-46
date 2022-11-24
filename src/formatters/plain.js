@@ -14,24 +14,24 @@ const keyPath = (path, el) => {
   return path === '' ? `${el.key}` : `${path}.${el.key}`
 }
 
+const composeAnswer = (el, key) => {
+  if (el.type === 'nested') {
+    return `${plain(el.children, key)}`;
+  } else if (el.type === 'added') {
+    return `Property '${key}' was added with value: ${findValue(el.value2)}`;
+  } else if (el.type === 'deleted') {
+    return `Property '${key}' was removed`;
+  } 
+  return el.type === 'changed' 
+    ? `Property '${key}' was updated. From ${findValue(el.value1)} to ${findValue(el.value2)}`
+    : '';
+}
+
 const plain = (data, path = '') => {
   const lines = data.flatMap((el) => {
     const key = keyPath(path, el);
-    const type = el.type;
-    const children = el.children;
-    const firstValue = el.value1;
-    const secondValue = el.value2;
 
-    if (type === 'nested') {
-      return `${plain(children, key)}`;
-    } else if (type === 'added') {
-      return `Property '${key}' was added with value: ${findValue(secondValue)}`;
-    } else if (type === 'deleted') {
-      return `Property '${key}' was removed`;
-    } 
-    return type === 'changed' 
-      ? `Property '${key}' was updated. From ${findValue(firstValue)} to ${findValue(secondValue)}`
-      : '';
+    return composeAnswer(el, key);
   });
 
   return lines.filter((e) => e !== '').join('\n');
