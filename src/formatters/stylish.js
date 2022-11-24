@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
-  const spacesCount = 2;
-
+const spacesCount = 2;
 
 const findValue = (currentValue, depth = 1) => {
   const indentSize = depth * spacesCount;
@@ -23,28 +22,29 @@ const findValue = (currentValue, depth = 1) => {
   ].join('\n');
 }
 
+const composeAnswer = (line, depth, indentSize, currentIndent) => {
+    if (line.type === 'nested') {
+      return `${' '.repeat(indentSize + 1)} ${line.key}: ${stylish(line.children, depth + 2)}`;
+    } else if (line.type === 'added') {
+      return `${currentIndent}+ ${line.key}: ${findValue(line.value2, depth + 2)}`;
+    } else if (line.type === 'deleted') {
+      return `${currentIndent}- ${line.key}: ${findValue(line.value1, depth + 2)}`;
+    } else if (line.type === 'changed') {
+      return [
+        `${currentIndent}- ${line.key}: ${findValue(line.value1, depth + 2)}`,
+        `${currentIndent}+ ${line.key}: ${findValue(line.value2, depth + 2)}`,
+      ];
+    }
+    return `${currentIndent}  ${line.key}: ${findValue(line.value1, depth + 2)}`;
+}
+
 const stylish = (data, depth = 1) => {
   const indentSize = depth * spacesCount;
   const currentIndent = ' '.repeat(indentSize);
   const bracketIndent = ' '.repeat(indentSize - spacesCount);
 
-  const lines = data.flatMap((el) => {
-    if (el.type === 'nested') {
-      return `${' '.repeat(indentSize + 1)} ${el.key}: ${stylish(el.children, depth + 2)}`;
-    }
-    if (el.type === 'added') {
-      return `${currentIndent}+ ${el.key}: ${findValue(el.value2, depth + 2)}`;
-    }
-    if (el.type === 'deleted') {
-      return `${currentIndent}- ${el.key}: ${findValue(el.value1, depth + 2)}`;
-    }
-    if (el.type === 'changed') {
-      return [
-        `${currentIndent}- ${el.key}: ${findValue(el.value1, depth + 2)}`,
-        `${currentIndent}+ ${el.key}: ${findValue(el.value2, depth + 2)}`,
-      ];
-    }
-    return `${currentIndent}  ${el.key}: ${findValue(el.value1, depth + 2)}`;
+  const lines = data.flatMap((line) => {
+    return composeAnswer(line, depth, indentSize, currentIndent)
   });
 
   return [
