@@ -5,7 +5,7 @@ const sortKeys = (obj1, obj2) => {
 }
 
 const composeAnswer = (obj1, obj2, allKeys) => {
-    const answer = allKeys.map((key) => {
+    return allKeys.map((key) => {
     if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
       return { key, children: findDiff(obj1[key], obj2[key]), type: 'nested' };
     } else if (!_.has(obj1, key)) {
@@ -17,7 +17,6 @@ const composeAnswer = (obj1, obj2, allKeys) => {
     ? { key, value1: obj1[key], value2: obj2[key], type: 'changed', }
     : { key, value1: obj1[key], type: 'unchanged' };
   });
-  return answer;
 }
 
 const findDiff = (obj1, obj2) => {
