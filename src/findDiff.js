@@ -3,9 +3,7 @@ import _ from 'lodash';
 const sortKeys = (obj1, obj2) => _.sortBy(_.union(_.keys(obj1), _.keys(obj2)));
 
 const composeAnswer = (key, obj1, obj2) => {
-  if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
-    return { key, children: findDiff(obj1[key], obj2[key]), type: 'nested' };
-  } if (!_.has(obj1, key)) {
+  if (!_.has(obj1, key)) {
     return { key, value2: obj2[key], type: 'added' };
   } if (!_.has(obj2, key)) {
     return { key, value1: obj1[key], type: 'deleted' };
@@ -25,8 +23,8 @@ const findDiff = (obj1, obj2) => {
       return { key, children: findDiff(obj1[key], obj2[key]), type: 'nested' };
     }
     return composeAnswer(key, obj1, obj2);
-  })
-  
+  });
+
   return result;
 };
 
