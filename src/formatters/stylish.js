@@ -1,10 +1,10 @@
 import _ from 'lodash';
 
 
-const findValue = (currentValue, depth) => {
+const findValue = (currentValue, depth = 1) => {
   const spacesCount = 2;
   const indentSize = depth * spacesCount;
-  const currentIndent = ' '.repeat(indentSize);
+  const currentIndent = ' '.repeat(indentSize + 2);
   const bracketIndent = ' '.repeat(indentSize - spacesCount);
 
   if (!_.isObject(currentValue)) {
