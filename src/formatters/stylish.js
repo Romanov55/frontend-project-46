@@ -1,8 +1,9 @@
 import _ from 'lodash';
 
+  const spacesCount = 2;
+
 
 const findValue = (currentValue, depth = 1) => {
-  const spacesCount = 2;
   const indentSize = depth * spacesCount;
   const currentIndent = ' '.repeat(indentSize + 2);
   const bracketIndent = ' '.repeat(indentSize - spacesCount);
@@ -23,11 +24,9 @@ const findValue = (currentValue, depth = 1) => {
 }
 
 const stylish = (data, depth = 1) => {
-  const spacesCount = 2;
   const indentSize = depth * spacesCount;
   const currentIndent = ' '.repeat(indentSize);
   const bracketIndent = ' '.repeat(indentSize - spacesCount);
-
 
   const lines = data.flatMap((el) => {
     if (el.type === 'nested') {
