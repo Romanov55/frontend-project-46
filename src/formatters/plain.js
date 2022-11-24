@@ -13,9 +13,7 @@ const findValue = (currentValue) => {
 const keyPath = (path, line) => (path === '' ? `${line.key}` : `${path}.${line.key}`);
 
 const composeAnswer = (line, key) => {
-  if (line.type === 'nested') {
-    return `${plain(line.children, key)}`;
-  } if (line.type === 'added') {
+  if (line.type === 'added') {
     return `Property '${key}' was added with value: ${findValue(line.value2)}`;
   } if (line.type === 'deleted') {
     return `Property '${key}' was removed`;
@@ -29,6 +27,9 @@ const plain = (data, path = '') => {
   const lines = data.flatMap((line) => {
     const key = keyPath(path, line);
 
+    if (line.type === 'nested') {
+      return `${plain(line.children, key)}`;
+    }
     return composeAnswer(line, key);
   });
 
