@@ -10,25 +10,13 @@ const findValue = (currentValue) => {
   return currentValue;
 };
 
-const isTypeNested = (type) => {
-  if (type  === 'nested') {
-    return true
-  }
-}
-
-const isTypeAdded = (type) => {
-  if (type === 'added') {
-    return true
-  }
-}
-
 const plain = (data, path = '') => {
   const lines = data.flatMap((el) => {
     const keyPath = (path === '' ? `${el.key}` : `${path}.${el.key}`);
 
-    if (isTypeNested(el.type)) {
+    if (el.type === 'nested') {
       return `${plain(el.children, keyPath)}`;
-    } else if (isTypeAdded) {
+    } else if (el.type === 'added') {
       return `Property '${keyPath}' was added with value: ${findValue(el.value2)}`;
     } else if (el.type === 'deleted') {
       return `Property '${keyPath}' was removed`;
