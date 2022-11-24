@@ -10,6 +10,10 @@ const findValue = (currentValue) => {
   return currentValue;
 };
 
+const filter = (lines) => {
+  return lines.filter((e) => e !== '').join('\n');
+}
+
 const plain = (data, path = '') => {
   const lines = data.flatMap((el) => {
     const keyPath = (path === '' ? `${el.key}` : `${path}.${el.key}`);
@@ -29,7 +33,7 @@ const plain = (data, path = '') => {
     return '';
   });
 
-  return lines.filter((e) => e !== '').join('\n');
+  return filter(lines)
 };
 
 export default plain;
