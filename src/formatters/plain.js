@@ -10,28 +10,28 @@ const findValue = (currentValue) => {
   return currentValue;
 };
 
-const keyPath = (path, el) => {
-  return path === '' ? `${el.key}` : `${path}.${el.key}`
+const keyPath = (path, line) => {
+  return path === '' ? `${line.key}` : `${path}.${line.key}`
 }
 
-const composeAnswer = (el, key) => {
-  if (el.type === 'nested') {
-    return `${plain(el.children, key)}`;
-  } else if (el.type === 'added') {
-    return `Property '${key}' was added with value: ${findValue(el.value2)}`;
-  } else if (el.type === 'deleted') {
+const composeAnswer = (line, key) => {
+  if (line.type === 'nested') {
+    return `${plain(line.children, key)}`;
+  } else if (line.type === 'added') {
+    return `Property '${key}' was added with value: ${findValue(line.value2)}`;
+  } else if (line.type === 'deleted') {
     return `Property '${key}' was removed`;
   } 
-  return el.type === 'changed' 
-    ? `Property '${key}' was updated. From ${findValue(el.value1)} to ${findValue(el.value2)}`
+  return line.type === 'changed' 
+    ? `Property '${key}' was updated. From ${findValue(line.value1)} to ${findValue(line.value2)}`
     : '';
 }
 
 const plain = (data, path = '') => {
-  const lines = data.flatMap((el) => {
-    const key = keyPath(path, el);
+  const lines = data.flatMap((line) => {
+    const key = keyPath(path, line);
 
-    return composeAnswer(el, key);
+    return composeAnswer(line, key);
   });
 
   return lines.filter((e) => e !== '').join('\n');
