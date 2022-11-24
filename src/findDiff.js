@@ -1,8 +1,11 @@
 import _ from 'lodash';
 
-const findDiff = (obj1, obj2) => {
+const sortKeys = (obj1, obj2) => {
+  return _.sortBy(_.union(_.keys(obj1), _.keys(obj2)));
+}
 
-  const allKeys = _.sortBy(_.union(_.keys(obj1), _.keys(obj2)));
+const findDiff = (obj1, obj2) => {
+  const allKeys = sortKeys(obj1, obj2)
   
   const result = allKeys.map((key) => {
     if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
