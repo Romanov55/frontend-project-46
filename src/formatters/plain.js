@@ -10,19 +10,23 @@ const findValue = (currentValue) => {
   return currentValue;
 };
 
+const keyPath = (path, el) => {
+  return path === '' ? `${el.key}` : `${path}.${el.key}`
+}
+
 const plain = (data, path = '') => {
   const lines = data.flatMap((el) => {
-    const keyPath = (path === '' ? `${el.key}` : `${path}.${el.key}`);
+    const key = keyPath(path, el)
 
     if (el.type === 'nested') {
-      return `${plain(el.children, keyPath)}`;
+      return `${plain(el.children, key)}`;
     } else if (el.type === 'added') {
-      return `Property '${keyPath}' was added with value: ${findValue(el.value2)}`;
+      return `Property '${key}' was added with value: ${findValue(el.value2)}`;
     } else if (el.type === 'deleted') {
-      return `Property '${keyPath}' was removed`;
+      return `Property '${key}' was removed`;
     } 
     return el.type === 'changed' 
-      ? `Property '${keyPath}' was updated. From ${findValue(el.value1)} to ${findValue(el.value2)}`
+      ? `Property '${key}' was updated. From ${findValue(el.value1)} to ${findValue(el.value2)}`
       : '';
   });
 
