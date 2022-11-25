@@ -5,7 +5,7 @@
 
 <h2>Start:</h2>
 
-1. Clone this repository with 'git clone git@github.com:vitaliialymar/frontend-project-46.git' command;
+1. Clone this repository with 'git clone git@github.com:Romanov55/frontend-project-46.git' command;
 2. Go to the directory 'frontend-project-46' with command 'cd frontend-project-46';
 3. Use 'make install' command;
 4. And use 'npm link' command.
