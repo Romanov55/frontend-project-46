@@ -4,12 +4,9 @@ import { Command } from 'commander';
 import genDiff from '../src/index.js';
 
 const program = new Command();
-
 program
-  .name('gendif')
+  .version('0.0.1', '-V, --version', 'output the version number')
   .description('Compares two configuration files and shows a difference.')
-  .version('1.0.0', '-v, --version', 'output the version number')
-  .helpOption('-h, --help', 'display help for command')
   .option('-f, --format <type>', 'output format', 'stylish')
   .argument('<filepath1>', 'path to file1')
   .argument('<filepath2>', 'path to file2')
