@@ -5,10 +5,10 @@
 
 <h2>Start:</h2>
 
-Clone this repository with 'git clone git@github.com:vitaliialymar/frontend-project-46.git' command;
-Go to the directory 'frontend-project-46' with command 'cd frontend-project-46';
-Use 'make install' command;
-And use 'npm link' command.
+1. Clone this repository with 'git clone git@github.com:vitaliialymar/frontend-project-46.git' command;
+2. Go to the directory 'frontend-project-46' with command 'cd frontend-project-46';
+3. Use 'make install' command;
+4. And use 'npm link' command.
 
 <h3>difference between json files</h3>
 [![asciicast] (https://asciinema.org/a/jas1qldJypbej5UgNQu9bnHTA)
