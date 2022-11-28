@@ -39,7 +39,7 @@ const plain = (data, path = '') => {
       case "changed":
         return `Property '${key}' was updated. From ${getStrict(line.value1)} to ${getStrict(line.value2)}`;
       default:
-        return '';
+        return 'Error! Unknown type';
     }
   });
 
