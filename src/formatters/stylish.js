@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const spacesCount = 2;
 
-const findValue = (currentValue, depth = 1) => {
+const getStrict = (currentValue, depth = 1) => {
   const indentSize = depth * spacesCount;
   const currentIndent = ' '.repeat(indentSize + 2);
   const bracketIndent = ' '.repeat(indentSize - spacesCount);
@@ -13,7 +13,7 @@ const findValue = (currentValue, depth = 1) => {
 
   const lines = Object
     .entries(currentValue)
-    .map(([key, val]) => `${currentIndent}${key}: ${findValue(val, depth + 2)}`);
+    .map(([key, val]) => `${currentIndent}${key}: ${getStrict(val, depth + 2)}`);
 
   return [
     '{',
@@ -22,16 +22,16 @@ const findValue = (currentValue, depth = 1) => {
   ].join('\n');
 };
 
-const composeAnswer = (line, depth, indentSize, currentIndent) => {
+const compose = (line, depth, indentSize, currentIndent) => {
   if (line.type === 'added') {
-    return `${currentIndent}+ ${line.key}: ${findValue(line.value2, depth + 2)}`;
+    return `${currentIndent}+ ${line.key}: ${getStrict(line.value2, depth + 2)}`;
   } if (line.type === 'deleted') {
-    return `${currentIndent}- ${line.key}: ${findValue(line.value1, depth + 2)}`;
+    return `${currentIndent}- ${line.key}: ${getStrict(line.value1, depth + 2)}`;
   }
   return (line.type === 'changed')
-    ? [`${currentIndent}- ${line.key}: ${findValue(line.value1, depth + 2)}`,
-      `${currentIndent}+ ${line.key}: ${findValue(line.value2, depth + 2)}`]
-    : `${currentIndent}  ${line.key}: ${findValue(line.value1, depth + 2)}`;
+    ? [`${currentIndent}- ${line.key}: ${getStrict(line.value1, depth + 2)}`,
+      `${currentIndent}+ ${line.key}: ${getStrict(line.value2, depth + 2)}`]
+    : `${currentIndent}  ${line.key}: ${getStrict(line.value1, depth + 2)}`;
 };
 
 const stylish = (data, depth = 1) => {
@@ -43,7 +43,7 @@ const stylish = (data, depth = 1) => {
     if (line.type === 'nested') {
       return `${' '.repeat(indentSize + 1)} ${line.key}: ${stylish(line.children, depth + 2)}`;
     }
-    return composeAnswer(line, depth, indentSize, currentIndent);
+    return compose(line, depth, indentSize, currentIndent);
   });
   return [
     '{',
