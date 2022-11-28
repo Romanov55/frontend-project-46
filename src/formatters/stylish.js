@@ -22,28 +22,25 @@ const getStrict = (currentValue, depth = 1) => {
   ].join('\n');
 };
 
-const compose = (line, depth, indentSize, currentIndent) => {
-  if (line.type === 'added') {
-    return `${currentIndent}+ ${line.key}: ${getStrict(line.value2, depth + 2)}`;
-  } if (line.type === 'deleted') {
-    return `${currentIndent}- ${line.key}: ${getStrict(line.value1, depth + 2)}`;
-  }
-  return (line.type === 'changed')
-    ? [`${currentIndent}- ${line.key}: ${getStrict(line.value1, depth + 2)}`,
-      `${currentIndent}+ ${line.key}: ${getStrict(line.value2, depth + 2)}`]
-    : `${currentIndent}  ${line.key}: ${getStrict(line.value1, depth + 2)}`;
-};
-
 const stylish = (data, depth = 1) => {
   const indentSize = depth * spacesCount;
   const currentIndent = ' '.repeat(indentSize);
   const bracketIndent = ' '.repeat(indentSize - spacesCount);
 
   const lines = data.flatMap((line) => {
-    if (line.type === 'nested') {
-      return `${' '.repeat(indentSize + 1)} ${line.key}: ${stylish(line.children, depth + 2)}`;
+    switch (line.type) {
+      case 'nested':
+        return `${' '.repeat(indentSize + 1)} ${line.key}: ${stylish(line.children, depth + 2)}`
+      case 'added':
+        return `${currentIndent}+ ${line.key}: ${getStrict(line.value2, depth + 2)}`;
+      case 'deleted':
+        return `${currentIndent}- ${line.key}: ${getStrict(line.value1, depth + 2)}`;
+      case 'changed':
+        return [`${currentIndent}- ${line.key}: ${getStrict(line.value1, depth + 2)}`,
+        `${currentIndent}+ ${line.key}: ${getStrict(line.value2, depth + 2)}`]
+      default:
+        `${currentIndent}  ${line.key}: ${getStrict(line.value1, depth + 2)}`
     }
-    return compose(line, depth, indentSize, currentIndent);
   });
   return [
     '{',
