@@ -1,17 +1,17 @@
 import stylish from './stylish.js';
 import plain from './plain.js';
 
-const formatSelection = (data, format = 'stylish') => {
-  if (format === 'stylish') {
-    return stylish(data);
+const formatSelection = (data, format) => {
+  switch (format) {
+    case "stylish":
+      return stylish(data)
+    case "plain":
+      return plain(data)
+    case "json":
+      return JSON.stringify(data)
+    default:
+      return `Error! Unknown format - ${format}`
   }
-  if (format === 'plain') {
-    return plain(data);
-  }
-  if (format === 'json') {
-    return JSON.stringify(data);
-  }
-  return (`Error! Unknown format - ${format}`);
 };
 
 export default formatSelection;
