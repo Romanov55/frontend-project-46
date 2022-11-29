@@ -18,12 +18,12 @@ const plain = (data, path = '') => {
 
     switch (line.type) {
       case 'nested':
-        return `${plain(line.children, key)}`
-      case "added":
+        return `${plain(line.children, key)}`;
+      case 'added':
         return `Property '${key}' was added with value: ${getStrict(line.value2)}`;
-      case "deleted":
+      case 'deleted':
         return `Property '${key}' was removed`;
-      case "changed":
+      case 'changed':
         return `Property '${key}' was updated. From ${getStrict(line.value1)} to ${getStrict(line.value2)}`;
       default:
         return '';
