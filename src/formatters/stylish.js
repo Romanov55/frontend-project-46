@@ -36,10 +36,11 @@ const stylish = (data, depth = 1) => {
       case 'deleted':
         return `${currentIndent}- ${line.key}: ${getStrict(line.value1, depth + 2)}`;
       case 'changed':
-        return [`${currentIndent}- ${line.key}: ${getStrict(line.value1, depth + 2)}`,
-        `${currentIndent}+ ${line.key}: ${getStrict(line.value2, depth + 2)}`]
+        return [
+          `${currentIndent}- ${line.key}: ${getStrict(line.value1, depth + 2)}`,
+          `${currentIndent}+ ${line.key}: ${getStrict(line.value2, depth + 2)}`]
       default:
-        `${currentIndent}  ${line.key}: ${getStrict(line.value1, depth + 2)}`
+        return `${currentIndent}  ${line.key}: ${getStrict(line.value1, depth + 2)}`
     }
   });
   return [
