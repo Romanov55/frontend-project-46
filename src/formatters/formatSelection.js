@@ -3,14 +3,14 @@ import plain from './plain.js';
 
 const formatSelection = (data, format) => {
   switch (format) {
-    case "stylish":
-      return stylish(data)
-    case "plain":
-      return plain(data)
-    case "json":
-      return JSON.stringify(data)
+    case 'stylish':
+      return stylish(data);
+    case 'plain':
+      return plain(data);
+    case 'json':
+      return JSON.stringify(data);
     default:
-      return `Error! Unknown format - ${format}`
+      return `Error! Unknown format - ${format}`;
   }
 };
 
