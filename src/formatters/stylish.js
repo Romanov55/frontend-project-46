@@ -30,7 +30,7 @@ const stylish = (data, depth = 1) => {
   const lines = data.flatMap((line) => {
     switch (line.type) {
       case 'nested':
-        return `${' '.repeat(indentSize + 1)} ${line.key}: ${stylish(line.children, depth + 2)}`
+        return `${' '.repeat(indentSize + 1)} ${line.key}: ${stylish(line.children, depth + 2)}`;
       case 'added':
         return `${currentIndent}+ ${line.key}: ${getStrict(line.value2, depth + 2)}`;
       case 'deleted':
@@ -38,9 +38,9 @@ const stylish = (data, depth = 1) => {
       case 'changed':
         return [
           `${currentIndent}- ${line.key}: ${getStrict(line.value1, depth + 2)}`,
-          `${currentIndent}+ ${line.key}: ${getStrict(line.value2, depth + 2)}`]
+          `${currentIndent}+ ${line.key}: ${getStrict(line.value2, depth + 2)}`];
       default:
-        return `${currentIndent}  ${line.key}: ${getStrict(line.value1, depth + 2)}`
+        return `${currentIndent}  ${line.key}: ${getStrict(line.value1, depth + 2)}`;
     }
   });
   return [
