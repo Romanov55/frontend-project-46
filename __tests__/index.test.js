@@ -12,15 +12,15 @@ const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', 
 
 test.each([
   ['file1.json', 'file2.json', 'stylish', 'trueResultStylish.txt'],
-  ['file1.json', 'file2.json', , 'trueResultStylish.txt'],
+  ['file1.json', 'file2.json', undefined, 'trueResultStylish.txt'],
   ['file1.yml', 'file2.yml', 'stylish', 'trueResultStylish.txt'],
   ['file1.json', 'file2.json', 'plain', 'trueResultPlain.txt'],
   ['file1.yml', 'file2.yml', 'plain', 'trueResultPlain.txt'],
   ['file1.json', 'file2.json', 'json', 'trueResultJson.txt'],
   ['file1.yml', 'file2.yml', 'json', 'trueResultJson.txt'],
 ])('test message', (filename1, filename2, formatName, expectedName) => {
-    const file1 = getFixturePath(filename1);
-    const file2 = getFixturePath(filename2);
-    const expected = fs.readFileSync(getFixturePath(expectedName), 'utf8');
+  const file1 = getFixturePath(filename1);
+  const file2 = getFixturePath(filename2);
+  const expected = fs.readFileSync(getFixturePath(expectedName), 'utf8');
   expect(genDiff(file1, file2, formatName)).toEqual(expected);
 });
