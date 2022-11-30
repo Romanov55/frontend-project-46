@@ -22,5 +22,6 @@ test.each([
   const file1 = getFixturePath(filename1);
   const file2 = getFixturePath(filename2);
   const expected = fs.readFileSync(getFixturePath(expectedName), 'utf8');
+
   expect(genDiff(file1, file2, formatName)).toEqual(expected);
 });
