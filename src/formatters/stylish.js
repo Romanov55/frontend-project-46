@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const spacesCount = 2;
 
-const getStrict = (currentValue, depth = 1) => {
+const getString = (currentValue, depth = 1) => {
   const indentSize = depth * spacesCount;
   const currentIndent = ' '.repeat(indentSize + 2);
   const bracketIndent = ' '.repeat(indentSize - spacesCount);
@@ -13,7 +13,7 @@ const getStrict = (currentValue, depth = 1) => {
 
   const lines = Object
     .entries(currentValue)
-    .map(([key, val]) => `${currentIndent}${key}: ${getStrict(val, depth + 2)}`);
+    .map(([key, val]) => `${currentIndent}${key}: ${getString(val, depth + 2)}`);
 
   return [
     '{',
@@ -32,15 +32,15 @@ const stylish = (data, depth = 1) => {
       case 'nested':
         return `${' '.repeat(indentSize + 1)} ${line.key}: ${stylish(line.children, depth + 2)}`;
       case 'added':
-        return `${currentIndent}+ ${line.key}: ${getStrict(line.value2, depth + 2)}`;
+        return `${currentIndent}+ ${line.key}: ${getString(line.value2, depth + 2)}`;
       case 'deleted':
-        return `${currentIndent}- ${line.key}: ${getStrict(line.value1, depth + 2)}`;
+        return `${currentIndent}- ${line.key}: ${getString(line.value1, depth + 2)}`;
       case 'changed':
         return [
-          `${currentIndent}- ${line.key}: ${getStrict(line.value1, depth + 2)}`,
-          `${currentIndent}+ ${line.key}: ${getStrict(line.value2, depth + 2)}`];
+          `${currentIndent}- ${line.key}: ${getString(line.value1, depth + 2)}`,
+          `${currentIndent}+ ${line.key}: ${getString(line.value2, depth + 2)}`];
       default:
-        return `${currentIndent}  ${line.key}: ${getStrict(line.value1, depth + 2)}`;
+        return `${currentIndent}  ${line.key}: ${getString(line.value1, depth + 2)}`;
     }
   });
   return [
