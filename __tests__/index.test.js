@@ -18,7 +18,7 @@ test.each([
   ['file1.yml', 'file2.yml', 'plain', 'trueResultPlain.txt'],
   ['file1.json', 'file2.json', 'json', 'trueResultJson.txt'],
   ['file1.yml', 'file2.yml', 'json', 'trueResultJson.txt'],
-])('test', (filename1, filename2, formatName, expectedName) => {
+])('testCheck', (filename1, filename2, formatName, expectedName) => {
   const file1 = getFixturePath(filename1);
   const file2 = getFixturePath(filename2);
   const expected = fs.readFileSync(getFixturePath(expectedName), 'utf8');
