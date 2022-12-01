@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const getStrict = (currentValue) => {
+const getString = (currentValue) => {
   if (_.isObject(currentValue)) {
     return '[complex value]';
   }
@@ -20,11 +20,11 @@ const plain = (data, path = '') => {
       case 'nested':
         return `${plain(line.children, key)}`;
       case 'added':
-        return `Property '${key}' was added with value: ${getStrict(line.value2)}`;
+        return `Property '${key}' was added with value: ${getString(line.value2)}`;
       case 'deleted':
         return `Property '${key}' was removed`;
       case 'changed':
-        return `Property '${key}' was updated. From ${getStrict(line.value1)} to ${getStrict(line.value2)}`;
+        return `Property '${key}' was updated. From ${getString(line.value1)} to ${getString(line.value2)}`;
       default:
         return '';
     }
