@@ -25,12 +25,10 @@ const plain = (data, path = '') => {
         return `Property '${key}' was removed`;
       case 'changed':
         return `Property '${key}' was updated. From ${getString(line.value1)} to ${getString(line.value2)}`;
-      default:
-        return '';
     }
   });
 
-  return lines.filter((e) => e !== '').join('\n');
+  return lines.filter((e) => e).join('\n');
 };
 
 export default plain;
