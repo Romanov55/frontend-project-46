@@ -25,6 +25,8 @@ const plain = (data, path = '') => {
         return `Property '${key}' was removed`;
       case 'changed':
         return `Property '${key}' was updated. From ${getString(line.value1)} to ${getString(line.value2)}`;
+      default:
+        return undefined;
     }
   });
 
