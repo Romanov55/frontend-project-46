@@ -10,7 +10,7 @@ const formatSelection = (data, format) => {
     case 'json':
       return JSON.stringify(data);
     default:
-      throw `Error! Unknown format ${format}`;
+      throw new `Error! Unknown format ${format}`();
   }
 };
 
