@@ -16,7 +16,9 @@ const getDiff = (obj1, obj2) => {
       return { key, value1: obj1[key], type: 'deleted' };
     }
     if (obj1[key] !== obj2[key]) {
-      return { key, value1: obj1[key], value2: obj2[key], type: 'changed' }
+      return {
+        key, value1: obj1[key], value2: obj2[key], type: 'changed',
+      };
     }
     return { key, value1: obj1[key], type: 'unchanged' };
   });
