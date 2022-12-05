@@ -17,18 +17,23 @@ const plain = (data, path = '') => {
     const key = keyPath(path, item);
     switch (item.type) {
       case 'nested':
-        return `${acc}${plain(item.children, key)}`;
+        acc.push(`${plain(item.children, key)}`);
+        break;
       case 'added':
-        return `${acc}Property '${key}' was added with value: ${getString(item.value2)}\n`;
+        acc.push(`Property '${key}' was added with value: ${getString(item.value2)}`);
+        break;
       case 'deleted':
-        return `${acc}Property '${key}' was removed\n`;
+        acc.push(`Property '${key}' was removed`);
+        break;
       case 'changed':
-        return `${acc}Property '${key}' was updated. From ${getString(item.value1)} to ${getString(item.value2)}\n`;
+        acc.push(`Property '${key}' was updated. From ${getString(item.value1)} to ${getString(item.value2)}`);
+        break;
       default:
-        return acc;
+        break;
     }
+    return acc;
   }
-  return data.reduce(lines, '');
+  return data.reduce(lines, []).join('\n');
 };
 
 export default plain;
