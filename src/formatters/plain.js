@@ -10,27 +10,25 @@ const getString = (currentValue) => {
   return currentValue;
 };
 
-const keyPath = (path, line) => (path === '' ? `${line.key}` : `${path}.${line.key}`);
+const keyPath = (path, item) => (path === '' ? `${item.key}` : `${path}.${item.key}`);
 
 const plain = (data, path = '') => {
-  const lines = data.flatMap((line) => {
-    const key = keyPath(path, line);
-
-    switch (line.type) {
+  function lines(acc, item) {
+    const key = keyPath(path, item);
+    switch (item.type) {
       case 'nested':
-        return `${plain(line.children, key)}`;
+        return acc + `${plain(item.children, key)}`;
       case 'added':
-        return `Property '${key}' was added with value: ${getString(line.value2)}`;
+        return acc + `Property '${key}' was added with value: ${getString(item.value2)}\n`;
       case 'deleted':
-        return `Property '${key}' was removed`;
+        return acc + `Property '${key}' was removed\n`;
       case 'changed':
-        return `Property '${key}' was updated. From ${getString(line.value1)} to ${getString(line.value2)}`;
+        return acc + `Property '${key}' was updated. From ${getString(item.value1)} to ${getString(item.value2)}\n`;
       default:
-        return undefined;
+        return acc + item.children
     }
-  });
-
-  return lines.filter((e) => e).join('\n');
+  }
+  return data.reduce(lines, '')
 };
 
 export default plain;
