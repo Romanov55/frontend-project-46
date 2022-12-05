@@ -25,9 +25,8 @@ const plain = (data, path = '') => {
       case 'changed':
         return [...acc, `Property '${key}' was updated. From ${getString(item.value1)} to ${getString(item.value2)}`];
       default:
-        break;
+        return acc;
     }
-    return acc;
   }
   return data.reduce(lines, []).join('\n');
 };
