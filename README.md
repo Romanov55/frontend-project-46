@@ -2,7 +2,7 @@
 [![Actions Status](https://github.com/Romanov55/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/Romanov55/frontend-project-46/actions) <a href="https://codeclimate.com/github/Romanov55/frontend-project-46/maintainability"><img src="https://api.codeclimate.com/v1/badges/a865a1e117b33590fd63/maintainability" /></a> <a href="https://codeclimate.com/github/Romanov55/frontend-project-46/test_coverage"><img src="https://api.codeclimate.com/v1/badges/a865a1e117b33590fd63/test_coverage" /></a>
 
 
-<h2>Requires git(https://git-scm.com/) and [Node.js (LTS)](https://nodejs.org/en/) installed.</h2>
+<h2>Requires [git](https://git-scm.com/) and [Node.js (LTS)](https://nodejs.org/en/) installed.</h2>
 
 <h1>This utility for evaluating the difference in two files</h1>
 
