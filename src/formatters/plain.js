@@ -13,7 +13,7 @@ const getString = (currentValue) => {
 const keyPath = (path, item) => (path === '' ? `${item.key}` : `${path}.${item.key}`);
 
 const plain = (data, path = '') => {
-  function lines(acc, item) {
+  const lines = (acc, item) => {
     const key = keyPath(path, item);
     switch (item.type) {
       case 'nested':
