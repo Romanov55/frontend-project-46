@@ -11,12 +11,12 @@
 4. And use 'npm link' command.
 
 <h3>difference between json files</h3>
-[![asciicast](https://asciinema.org/a/jas1qldJypbej5UgNQu9bnHTA.svg)](https://asciinema.org/a/jas1qldJypbej5UgNQu9bnHTA)
+https://asciinema.org/a/jas1qldJypbej5UgNQu9bnHTA
 <h3>difference between yml files</h3>
-https://asciinema.org/a/FDJolWlQIwaW8DRWQvztdFXZW)
+https://asciinema.org/a/FDJolWlQIwaW8DRWQvztdFXZW
 <h3>difference between files with nested structure in format 'stylish'</h3>
-[![asciicast] (https://asciinema.org/a/DsHaHY1vpL2Lb7z95GX1JUJ3M)
+https://asciinema.org/a/DsHaHY1vpL2Lb7z95GX1JUJ3M
 <h3>difference between files with nested structure in format 'plain'</h3>
-[![asciicast] (https://asciinema.org/a/XrfhzyQnAY2upFLUH1zgWBG3M)
+https://asciinema.org/a/XrfhzyQnAY2upFLUH1zgWBG3M
 <h3>difference between files with nested structure in format 'json'</h3>
-[![asciicast] (https://asciinema.org/a/T1LgfiSwvo6OV1gV0rfDoBPoh)
+https://asciinema.org/a/T1LgfiSwvo6OV1gV0rfDoBPoh
