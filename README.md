@@ -11,7 +11,7 @@
 4. And use 'npm link' command.
 
 <h3>difference between json files</h3>
-[![asciicast](https://asciinema.org/a/jas1qldJypbej5UgNQu9bnHTA)
+[![asciicast](https://asciinema.org/a/jas1qldJypbej5UgNQu9bnHTA.svg)](https://asciinema.org/a/jas1qldJypbej5UgNQu9bnHTA.svg)
 <h3>difference between yml files</h3>
 [![asciicast] (https://asciinema.org/a/FDJolWlQIwaW8DRWQvztdFXZW)
 <h3>difference between files with nested structure in format 'stylish'</h3>
