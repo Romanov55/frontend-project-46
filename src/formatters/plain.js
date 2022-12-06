@@ -27,7 +27,7 @@ const plain = (data, path = '') => {
       default:
         return acc;
     }
-  }
+  };
   return data.reduce(lines, []).join('\n');
 };
 
